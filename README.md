@@ -159,19 +159,17 @@ Here, you can learn more about me, view my skills, certifications, and explore m
 
 - **GoDaddy**:
   - Domain name **vaideeshwaran.blog** was purchased through GoDaddy.
-  - Cost: **₹350 per year**.
 
 - **Cloudflare**:
   - **DNS Hosting**: Cloudflare manages DNS resolution for `vaideeshwaran.blog` and subdomains.
   - **SSL Certificates**: End-to-end encryption with Cloudflare's SSL/TLS management.
-  - The frontend application is accessible securely at **https://frontend.vaideeshwaran.blog**.
 
 ---
 
 ## Costs
 
 - **Domain Name**: ₹350 per year via GoDaddy.
-- **Azure Infrastructure**: ₹800 per month for hosting the Kubernetes cluster, application, and database.
+- **Azure Infrastructure**: ₹800 per month for hosting the Kubernetes cluster and application.
 
 ---
 

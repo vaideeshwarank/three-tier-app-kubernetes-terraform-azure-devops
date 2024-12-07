@@ -21,8 +21,8 @@ Welcome to my **Three-Tier Cloud Architecture** project! This repository demonst
 ## Overview
 
 This project implements a **cloud-native three-tier architecture** to host:
-1. A **To-Do List Application** (Frontend, Backend, and Database).
-2. A blog website **[vaideeshwaran.blog](https://vaideeshwaran.blog)**, with an icon to explore the live application.
+1. **To-Do List Application (http://frontend.vaideeshwaran.blog)** (Frontend, Backend, and Database).
+2. blog website **[vaideeshwaran.blog](https://vaideeshwaran.blog)** - Here, you can learn more about me, view my skills, certifications, and explore my projects!
 
 It showcases:
 - Scalable **Kubernetes deployments** with automated CI/CD pipelines.

@@ -21,7 +21,7 @@ Welcome to my **Three-Tier Cloud Architecture** project! This repository demonst
 ## Overview
 
 This project implements a **cloud-native three-tier architecture** to host:
-1. **To-Do List Application (http://frontend.vaideeshwaran.blog)** (Frontend, Backend, and Database).
+1. **To-Do List Application (https://frontend.vaideeshwaran.blog)** (Frontend, Backend, and Database).
 2. blog website **[vaideeshwaran.blog](https://vaideeshwaran.blog)** - Here, you can learn more about me, view my skills, certifications, and explore my projects!
 
 It showcases:
@@ -45,7 +45,7 @@ The architecture consists of three tiers:
 **Deployed on Azure Kubernetes Service (AKS)**:
 - Horizontal Pod Autoscaling (HPA) for scalability.
 - Persistent Volumes for database storage.
-- Ingress controllers for routing traffic.
+- Nginx Ingress controller for routing traffic.
 
 ---
 
@@ -54,8 +54,7 @@ The architecture consists of three tiers:
 - **Scalable Architecture**: Kubernetes ensures reliability and fault tolerance.
 - **Integrated Monitoring**: Prometheus and Grafana for real-time insights.
 - **CI/CD Pipelines**: Azure DevOps automates application deployment.
-- **Secure Configuration**: Secrets managed with Kubernetes and Azure tools.
-- **Multi-Tier Deployment**: Frontend, backend, and database containerized.
+- **Three-Tier Deployment**: Frontend, backend, and database containerized.
 
 ---
 
@@ -145,7 +144,7 @@ Ensure the following are installed on your local machine:
 
 The application is live! You can access it here:
 - **Frontend**: [frontend.vaideeshwaran.blog](http://frontend.vaideeshwaran.blog)
-- **GitHub Repository**: [View Source Code](https://github.com/vaideeshwarank/MyToDoListAppAKS.git)
+- **GitHub Repository**: [View Source Code](https://github.com/vaideeshwarank/three-tier-app-kubernetes-terraform-azure-devops.git)
 
 Alternatively, visit [vaideeshwaran.blog](https://vaideeshwaran.blog) and click on the **"View My To-Do List App"** icon to explore.
 
@@ -173,11 +172,5 @@ Custom Prometheus alerts notify on:
 - Pod failures or unavailability.
 
 ---
-
-## Future Improvements
-
-- Implement Helm charts for better management of Kubernetes manifests.
-- Add unit and integration tests for backend and frontend.
-- Automate SSL certificate management with Let's Encrypt.
 
 ---

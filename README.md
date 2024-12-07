@@ -172,5 +172,3 @@ Custom Prometheus alerts notify on:
 - Pod failures or unavailability.
 
 ---
-
----

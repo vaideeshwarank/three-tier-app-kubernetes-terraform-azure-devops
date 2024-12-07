@@ -1,7 +1,7 @@
 
 # Three-Tier Cloud Architecture with To-Do List Application
 
-Welcome to my **Three-Tier Cloud Architecture** project! This repository demonstrates expertise in **cloud computing**, **containerization**, **Kubernetes**, **Terraform**, and **Azure DevOps** by hosting a three-tier **To-Do List Application** and powering my blog website, [vaideeshwaran.blog](https://vaideeshwaran.blog).
+Welcome to my **Three-Tier Cloud Architecture** project! This repository demonstrates expertise in **cloud computing**, **containerization**, **Kubernetes**, **Terraform**, and **Azure DevOps** by hosting a full-stack **To-Do List Application** and powering my blog website, [vaideeshwaran.blog](https://vaideeshwaran.blog).
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -12,8 +12,9 @@ Welcome to my **Three-Tier Cloud Architecture** project! This repository demonst
 6. [Project Structure](#project-structure)
 7. [Technologies Used](#technologies-used)
 8. [To-Do List App Demo](#to-do-list-app-demo)
-9. [Monitoring and Observability](#monitoring-and-observability)
-10. [Future Improvements](#future-improvements)
+9. [Blog Website](#blog-website)
+10. [Monitoring and Observability](#monitoring-and-observability)
+11. [Future Improvements](#future-improvements)
 
 ---
 
@@ -142,7 +143,18 @@ Ensure the following are installed on your local machine:
 
 ## To-Do List App Demo
 
-Visit [vaideeshwaran.blog](https://vaideeshwaran.blog) and click on the **"View My To-Do List App"** icon to explore the app.
+The application is live! You can access it here:
+- **Frontend**: [frontend.vaideeshwaran.blog](http://frontend.vaideeshwaran.blog)
+- **GitHub Repository**: [View Source Code](https://github.com/vaideeshwarank/MyToDoListAppAKS.git)
+
+Alternatively, visit [vaideeshwaran.blog](https://vaideeshwaran.blog) and click on the **"View My To-Do List App"** icon to explore.
+
+---
+
+## Blog Website
+
+Visit my blog: **[vaideeshwaran.blog](https://vaideeshwaran.blog)**  
+Here, you can learn more about me, view my skills, certifications, and explore my projects!
 
 ---
 
@@ -169,7 +181,3 @@ Custom Prometheus alerts notify on:
 - Automate SSL certificate management with Let's Encrypt.
 
 ---
-
-### Notes
-
-Ensure to include the `three_tier_architecture_diagram.png` in the repository root to render the diagram correctly in the README.

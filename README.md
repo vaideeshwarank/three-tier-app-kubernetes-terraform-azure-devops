@@ -189,10 +189,3 @@ Custom Prometheus alerts notify on:
 
 ---
 
-## Future Improvements
-
-- Implement Helm charts for better management of Kubernetes manifests.
-- Add unit and integration tests for backend and frontend.
-- Automate SSL certificate management with Let's Encrypt.
-
----

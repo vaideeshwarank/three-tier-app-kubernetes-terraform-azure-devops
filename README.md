@@ -40,10 +40,6 @@ The architecture consists of three tiers:
 2. **Backend**: Node.js API server managing business logic and database interactions.
 3. **Database**: MongoDB for persistent storage.
 
-### Architecture Diagram
-
-![Three-Tier Architecture Diagram](three_tier_architecture_diagram.png)
-
 **Deployed on Azure Kubernetes Service (AKS)**:
 - Horizontal Pod Autoscaling (HPA) for scalability.
 - Persistent Volumes for database storage.

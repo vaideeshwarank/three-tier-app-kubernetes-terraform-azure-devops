@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: test-alert-rule
+  namespace: monitoring
+  labels:
+    release: prometheus
+spec:
+  groups:
+    - name: always-firing-alerts
+      rules:
+        - alert: AlwaysFiringTestAlert
+          expr: vector(1) # This expression always evaluates to 1
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Test Alert Always Firing"
+            description: "This is a test alert to ensure the alerting pipeline is working."

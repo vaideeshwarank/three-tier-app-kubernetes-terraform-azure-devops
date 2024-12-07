@@ -1,0 +1,64 @@
+# portfolio-build-pipeline.yml
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - backend/**
+
+pool:
+  name: 'terraform-build-agent'
+
+variables:
+  - group: 'portfolio project variable group'
+
+stages:
+  - stage: BuildAndPushDockerImage
+    displayName: "Build and Push Docker Image"
+    jobs:
+      - job: BuildDockerImage
+        displayName: "Build and Push Docker Image"
+        steps:
+          # Checkout Code
+          - checkout: self
+            displayName: "Checkout Code"
+
+          # Login to Docker Hub
+          - task: Docker@2
+            displayName: "Login to Docker Hub"
+            inputs:
+              command: login
+              containerRegistry: '$(dockerRegistryServiceConnection)'
+
+          # Build Docker Image
+          - task: Docker@2
+            displayName: "Build Docker Image"
+            inputs:
+              command: build
+              dockerfile: 'backend/Dockerfile'  
+              context: 'backend'                
+              repository: '$(containerRegistry)/$(repositoryName)'
+              tags: |
+                $(backendImageName)-$(Build.BuildId)
+
+          # Push Docker Image
+          - task: Docker@2
+            displayName: "Push Docker Image"
+            inputs:
+              command: push
+              containerRegistry: '$(dockerRegistryServiceConnection)'
+              repository: '$(containerRegistry)/$(repositoryName)'
+              tags: |
+                $(backendImageName)-$(Build.BuildId)
+
+          # Generate Image Tag File
+          - script: |
+              echo "$(containerRegistry)/$(repositoryName):$(backendImageName)-$(Build.BuildId)" > image_tag.txt
+            displayName: "Generate Image Tag File"
+
+          # Publish Image Tag Artifact
+          - publish: image_tag.txt
+            artifact: dockerImage
+            displayName: "Publish Image Tag Artifact"

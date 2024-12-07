@@ -1,0 +1,137 @@
+# azure-pipelines.yml
+
+trigger:
+  - none
+
+variables:
+  aksFilesPath: 'AKSfiles'  
+  sslCertPath: 'CloudFlareCerts/privkey.pem'  
+  sslPemPath: 'CloudFlareCerts/cert.pem'  
+  terraformWorkingDirectory: 'AKSterraformfiles'
+
+stages:
+  - stage: ProvisionInfrastructure
+    displayName: "Provision AKS Cluster with Terraform"
+    jobs:
+      - job: TerraformProvision
+        displayName: "Terraform AKS Provisioning"
+        pool:
+          name: 'terraform-build-agent'
+        steps:
+          - checkout: self
+          - task: AzureCLI@2
+            displayName: "Authenticate and Get AKS Credentials"
+            inputs:
+              azureSubscription: $(serviceConnectionName)
+              scriptType: 'ps'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "Triggering approval process via service connection"
+          - task: PowerShell@2
+            displayName: "Install Terraform and Git"
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Install Chocolatey if not already installed
+                if (-Not (Get-Command choco.exe -ErrorAction SilentlyContinue)) {
+                  Set-ExecutionPolicy Bypass -Scope Process -Force
+                  [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+                  Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+                }
+                Write-Host "Installing Git..."
+                choco install git -y
+                Write-Host "Installing Terraform..."
+                choco install terraform -y
+                terraform -version
+
+          - task: PowerShell@2
+            displayName: "Terraform Init"
+            env:
+              ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+              ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+              ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+              ARM_TENANT_ID: $(ARM_TENANT_ID)
+              TF_VAR_subscription_id: $(ARM_SUBSCRIPTION_ID)
+              TF_VAR_client_id: $(ARM_CLIENT_ID)
+              TF_VAR_client_secret: $(ARM_CLIENT_SECRET)
+              TF_VAR_tenant_id: $(ARM_TENANT_ID)
+              TF_VAR_resource_group_name: $(ResourceGroupName)
+              TF_VAR_location: $(aksLocation)
+              TF_VAR_aks_cluster_name: $(aksClusterName)
+              TF_VAR_node_vm_size: $(aks_node_vm_size)
+            inputs:
+              targetType: 'inline'
+              script: |
+                cd "$(System.DefaultWorkingDirectory)/$(terraformWorkingDirectory)"
+                terraform init
+
+          - task: PowerShell@2
+            displayName: "Terraform Plan"
+            env:
+              ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+              ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+              ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+              ARM_TENANT_ID: $(ARM_TENANT_ID)
+              TF_VAR_subscription_id: $(ARM_SUBSCRIPTION_ID)
+              TF_VAR_client_id: $(ARM_CLIENT_ID)
+              TF_VAR_client_secret: $(ARM_CLIENT_SECRET)
+              TF_VAR_tenant_id: $(ARM_TENANT_ID)
+              TF_VAR_resource_group_name: $(ResourceGroupName)
+              TF_VAR_location: $(aksLocation)
+              TF_VAR_aks_cluster_name: $(aksClusterName)
+              TF_VAR_node_vm_size: $(aks_node_vm_size)
+            inputs:
+              targetType: 'inline'
+              script: |
+                cd "$(System.DefaultWorkingDirectory)/$(terraformWorkingDirectory)"
+                terraform plan -out=tfplan
+
+          - task: PowerShell@2
+            displayName: "Terraform Apply"
+            env:
+              ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+              ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+              ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+              ARM_TENANT_ID: $(ARM_TENANT_ID)
+              TF_VAR_subscription_id: $(ARM_SUBSCRIPTION_ID)
+              TF_VAR_client_id: $(ARM_CLIENT_ID)
+              TF_VAR_client_secret: $(ARM_CLIENT_SECRET)
+              TF_VAR_tenant_id: $(ARM_TENANT_ID)
+              TF_VAR_resource_group_name: $(ResourceGroupName)
+              TF_VAR_location: $(aksLocation)
+              TF_VAR_aks_cluster_name: $(aksClusterName)
+              TF_VAR_node_vm_size: $(aks_node_vm_size)
+            inputs:
+              targetType: 'inline'
+              script: |
+                cd "$(System.DefaultWorkingDirectory)/$(terraformWorkingDirectory)"
+                terraform apply -auto-approve tfplan
+
+  - stage: DeployKubernetesResources
+    displayName: "Deploy Kubernetes Resources with PowerShell"
+    dependsOn: ProvisionInfrastructure
+    jobs:
+      - job: DeployResources
+        displayName: "Run k8sautomation.ps1"
+        pool:
+          name: 'terraform-build-agent'
+        steps:
+          - checkout: self
+          - task: AzureCLI@2
+            displayName: "Authenticate and Get AKS Credentials"
+            inputs:
+              azureSubscription: $(serviceConnectionName)
+              scriptType: 'ps'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az aks get-credentials --resource-group "$(ResourceGroupName)" --name "$(aksClusterName)" --overwrite-existing
+          - task: PowerShell@2
+            displayName: "Run k8sautomation.ps1 Script"
+            inputs:
+              targetType: 'filePath'
+              filePath: '$(System.DefaultWorkingDirectory)/$(aksFilesPath)/k8sautomation.ps1'
+              arguments: >
+                -ResourceGroupName "$(ResourceGroupName)" -AksClusterName "$(aksClusterName)" -AksFilesPath "$(System.DefaultWorkingDirectory)/$(aksFilesPath)" -SslCertPath "$(System.DefaultWorkingDirectory)/$(sslCertPath)" -SslPemPath "$(System.DefaultWorkingDirectory)/$(sslPemPath)" -DockerUsername "$(dockerUsername)" -DockerPassword "$(dockerPassword)" -DockerEmail "$(dockerEmail)"
+              powershellArguments: '-ExecutionPolicy Bypass'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/$(aksFilesPath)'
+              

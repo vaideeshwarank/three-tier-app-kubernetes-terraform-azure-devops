@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: docker-registryname/frontend-imagename
+        ports:
+        - containerPort: 80
+        env:
+          - name: REACT_APP_API_BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: app-config
+                key: REACT_APP_API_BASE_URL
+      imagePullSecrets:
+      - name: dockerhub-secret-name

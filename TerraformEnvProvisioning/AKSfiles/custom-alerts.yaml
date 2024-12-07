@@ -1,0 +1,92 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: custom-alert-rules
+  namespace: monitoring
+  labels:
+    release: prometheus
+spec:
+  groups:
+    - name: custom-pod-usage
+      rules:
+        # Adjusted High CPU Usage Alert
+        - alert: HighPodCpuUsage
+          expr: |
+            sum(rate(container_cpu_usage_seconds_total{container!="POD", pod!=""}[1m])) by (pod) > 0.5
+          for: 30s
+          labels:
+            severity: warning
+          annotations:
+            summary: "High CPU usage detected in Pod {{ $labels.pod }}"
+            description: "The pod {{ $labels.pod }} is using over 50% CPU for the last 1 minute."
+        # Other rules remain unchanged
+        - alert: DeploymentReplicaZero
+          expr: |
+            kube_deployment_status_replicas < 1
+          labels:
+            severity: critical
+          annotations:
+            summary: "Deployment {{ $labels.namespace }}/{{ $labels.deployment }} has zero replicas"
+            description: "Deployment {{ $labels.namespace }}/{{ $labels.deployment }} has zero running replicas."
+        - alert: HighMemoryUsageCustom
+          expr: |
+            avg by (namespace, controller, container, cluster) (
+              (
+                (
+                  container_memory_working_set_bytes{container!="", image!="", container!="POD", namespace="default"}
+                  /
+                  on(namespace, cluster, pod, container) group_left
+                  kube_pod_container_resource_limits{resource="memory", node!=""}
+                )
+                *
+                on(namespace, pod, cluster) group_left(controller)
+                label_replace(kube_pod_owner{namespace="default"}, "controller", "$1", "owner_name", "(.*)")
+              )
+            ) > 0.80
+          labels:
+            severity: warning
+          annotations:
+            summary: "High Memory usage detected in {{ $labels.namespace }}/{{ $labels.controller }}/{{ $labels.container }}"
+            description: |
+              Memory usage is above 80% in namespace {{ $labels.namespace }},
+              controller {{ $labels.controller }}, container {{ $labels.container }}.
+        - alert: PodCrashLoopBackOff
+          expr: |
+            kube_pod_container_status_waiting_reason{
+              reason="CrashLoopBackOff",
+              job="kube-state-metrics"
+            } >= 1
+          labels:
+            severity: critical
+          annotations:
+            summary: "Pod CrashLoopBackOff detected"
+            description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} is in CrashLoopBackOff state."
+        - alert: PodOOMKilled
+          expr: |
+            kube_pod_container_status_last_terminated_reason{
+              reason="OOMKilled",
+              job="kube-state-metrics"
+            } >= 1
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod OOMKilled detected"
+            description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} was OOMKilled."
+        - alert: PodRestarts
+          expr: |
+            increase(kube_pod_container_status_restarts_total{job="kube-state-metrics"}[30s]) > 0
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod Restarts detected"
+            description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} has restarted."
+    - name: custom-node-alerts
+      rules:
+        - alert: NodeNotReady
+          expr: |
+            kube_node_status_condition{condition="Ready", status="false"} == 1
+          labels:
+            severity: critical
+          annotations:
+            summary: "Node Not Ready"
+            description: "Node {{ $labels.node }} is not ready."

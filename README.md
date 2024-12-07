@@ -13,8 +13,10 @@ Welcome to my **Three-Tier Cloud Architecture** project! This repository demonst
 7. [Technologies Used](#technologies-used)
 8. [To-Do List App Demo](#to-do-list-app-demo)
 9. [Blog Website](#blog-website)
-10. [Monitoring and Observability](#monitoring-and-observability)
-11. [Future Improvements](#future-improvements)
+10. [DNS and SSL Management](#dns-and-ssl-management)
+11. [Costs](#costs)
+12. [Monitoring and Observability](#monitoring-and-observability)
+13. [Future Improvements](#future-improvements)
 
 ---
 
@@ -22,7 +24,7 @@ Welcome to my **Three-Tier Cloud Architecture** project! This repository demonst
 
 This project implements a **cloud-native three-tier architecture** to host:
 1. **To-Do List Application (https://frontend.vaideeshwaran.blog)** (Frontend, Backend, and Database).
-2. blog website **[vaideeshwaran.blog](https://vaideeshwaran.blog)** - Here, you can learn more about me, view my skills, certifications, and explore my projects!
+2. Blog website **[vaideeshwaran.blog](https://vaideeshwaran.blog)** - Here, you can learn more about me, view my skills, certifications, and explore my projects!
 
 It showcases:
 - Scalable **Kubernetes deployments** with automated CI/CD pipelines.
@@ -157,6 +159,26 @@ Here, you can learn more about me, view my skills, certifications, and explore m
 
 ---
 
+## DNS and SSL Management
+
+- **GoDaddy**:
+  - Domain name **vaideeshwaran.blog** was purchased through GoDaddy.
+  - Cost: **₹350 per year**.
+
+- **Cloudflare**:
+  - **DNS Hosting**: Cloudflare manages DNS resolution for `vaideeshwaran.blog` and subdomains.
+  - **SSL Certificates**: End-to-end encryption with Cloudflare's SSL/TLS management.
+  - The frontend application is accessible securely at **https://frontend.vaideeshwaran.blog**.
+
+---
+
+## Costs
+
+- **Domain Name**: ₹350 per year via GoDaddy.
+- **Azure Infrastructure**: ₹800 per month for hosting the Kubernetes cluster, application, and database.
+
+---
+
 ## Monitoring and Observability
 
 ### Monitoring Tools:
@@ -170,5 +192,13 @@ Here, you can learn more about me, view my skills, certifications, and explore m
 Custom Prometheus alerts notify on:
 - High CPU/memory usage.
 - Pod failures or unavailability.
+
+---
+
+## Future Improvements
+
+- Implement Helm charts for better management of Kubernetes manifests.
+- Add unit and integration tests for backend and frontend.
+- Automate SSL certificate management with Let's Encrypt.
 
 ---

@@ -141,16 +141,16 @@ Ensure the following are installed on your local machine:
 ## To-Do List App Demo
 
 The application is live! You can access it here:
-- **Frontend**: [vaideeshwaran.blog/frontend](http://vaideeshwaran.blog/frontend)
+- **Frontend**: [https://vaideeshwaran.blog/frontend](https://vaideeshwaran.blog/frontend)
 - **GitHub Repository**: [View Source Code](https://github.com/vaideeshwarank/three-tier-app-kubernetes-terraform-azure-devops.git)
 
-Alternatively, visit [vaideeshwaran.blog](https://vaideeshwaran.blog) and click on the **"View My To-Do List App"** icon to explore.
+Alternatively, visit [https://vaideeshwaran.blog](https://vaideeshwaran.blog) and click on the **"View My To-Do List App"** icon to explore.
 
 ---
 
 ## Blog Website
 
-Visit my blog: **[vaideeshwaran.blog](https://vaideeshwaran.blog)**  
+Visit my blog: **[https://vaideeshwaran.blog](https://vaideeshwaran.blog)**  
 Here, you can learn more about me, view my skills, certifications, and explore my projects!
 
 ---

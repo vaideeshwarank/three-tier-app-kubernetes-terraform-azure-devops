@@ -1,7 +1,7 @@
 
 # Three-Tier Cloud Architecture with To-Do List Application
 
-Welcome to my **Three-Tier Cloud Architecture** project! This repository demonstrates expertise in **cloud computing**, **containerization**, **Kubernetes**, **Terraform**, and **Azure DevOps** by hosting a three-tier **To-Do List Application** and powering my blog website, [vaideeshwaran.blog](https://vaideeshwaran.blog).
+Welcome to my **Three-Tier Cloud Architecture** project! This repository demonstrates expertise in **cloud computing**, **containerization**, **Kubernetes**, **Terraform**, and **Azure DevOps** by hosting a three-tier **To-Do List Application** and powering my blog website, [https://vaideeshwaran.blog](https://vaideeshwaran.blog).
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -24,7 +24,7 @@ Welcome to my **Three-Tier Cloud Architecture** project! This repository demonst
 
 This project implements a **cloud-native three-tier architecture** to host:
 1. **To-Do List Application (https://vaideeshwaran.blog/frontend)** (Frontend, Backend, and Database).
-2. Blog website **[vaideeshwaran.blog](https://vaideeshwaran.blog)** - Here, you can learn more about me, view my skills, certifications, and explore my projects!
+2. Blog website **[https://vaideeshwaran.blog](https://vaideeshwaran.blog)** - Here, you can learn more about me, view my skills, certifications, and explore my projects!
 
 It showcases:
 - Scalable **Kubernetes deployments** with automated CI/CD pipelines.

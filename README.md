@@ -23,7 +23,7 @@ Welcome to my **Three-Tier Cloud Architecture** project! This repository demonst
 ## Overview
 
 This project implements a **cloud-native three-tier architecture** to host:
-1. **To-Do List Application (https://frontend.vaideeshwaran.blog)** (Frontend, Backend, and Database).
+1. **To-Do List Application (https://vaideeshwaran.blog/frontend)** (Frontend, Backend, and Database).
 2. Blog website **[vaideeshwaran.blog](https://vaideeshwaran.blog)** - Here, you can learn more about me, view my skills, certifications, and explore my projects!
 
 It showcases:
@@ -141,7 +141,7 @@ Ensure the following are installed on your local machine:
 ## To-Do List App Demo
 
 The application is live! You can access it here:
-- **Frontend**: [frontend.vaideeshwaran.blog](http://frontend.vaideeshwaran.blog)
+- **Frontend**: [vaideeshwaran.blog/frontend](http://vaideeshwaran.blog/frontend)
 - **GitHub Repository**: [View Source Code](https://github.com/vaideeshwarank/three-tier-app-kubernetes-terraform-azure-devops.git)
 
 Alternatively, visit [vaideeshwaran.blog](https://vaideeshwaran.blog) and click on the **"View My To-Do List App"** icon to explore.

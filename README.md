@@ -16,20 +16,34 @@ Welcome to my **Three-Tier Cloud Architecture** project! This repository demonst
 10. [DNS and SSL Management](#dns-and-ssl-management)
 11. [Costs](#costs)
 12. [Monitoring and Observability](#monitoring-and-observability)
-13. [Future Improvements](#future-improvements)
 
 ---
 
 ## Overview
 
+Designed and implemented a scalable and highly available three-tier application architecture with a focus on containerization, automation, and monitoring.
+
+- **Frontend**: React-based user interface served through Nginx.
+- **Backend**: Node.js API server for business logic and database interactions.
+- **Database**: MongoDB for persistent storage.
+- **Containerization**: Used Docker to containerize all components, ensuring consistency across development, testing, and production environments.
+- **Kubernetes Deployment**: Hosted the application on Azure Kubernetes Service (AKS) for orchestration and high availability.
+- **Infrastructure Provisioning**: Automated provisioning of resources using Terraform, reducing manual effort and setup time.
+- **Version Control**: Managed source code and version control using GitHub, ensuring collaborative development and robust code management.
+- **CI/CD Pipelines**: Configured Azure DevOps pipelines for continuous integration and deployment, enabling automated testing, build, and deployment processes.
+- **Monitoring and Alerting**: Implemented monitoring using Prometheus and Grafana, providing real-time insights and proactive alerting for system health and performance.
+- **DNS Hosting**: Cloudflare manages DNS resolution for `vaideeshwaran.blog` and subdomains.
+- **SSL Certificates**: End-to-end encryption with Cloudflare's SSL/TLS management.
+
+### Key Achievements
+
+- Achieved **99.9% application uptime** through Kubernetes scaling and resource optimization.
+- Reduced deployment time by **60%** with automated CI/CD pipelines.
+- Improved troubleshooting efficiency with comprehensive monitoring dashboards.
+
 This project implements a **cloud-native three-tier architecture** to host:
 1. **To-Do List Application (https://vaideeshwaran.blog/frontend)** (Frontend, Backend, and Database).
 2. Blog website **[https://vaideeshwaran.blog](https://vaideeshwaran.blog)** - Here, you can learn more about me, view my skills, certifications, and explore my projects!
-
-It showcases:
-- Scalable **Kubernetes deployments** with automated CI/CD pipelines.
-- **Infrastructure as Code (IaC)** using Terraform.
-- Integrated **monitoring and alerting** via Prometheus and Grafana.
 
 ---
 

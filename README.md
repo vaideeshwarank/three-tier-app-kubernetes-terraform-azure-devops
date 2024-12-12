@@ -183,7 +183,7 @@ Here, you can learn more about me, view my skills, certifications, and explore m
 ## Costs
 
 - **Domain Name**: ₹350 per year via GoDaddy.
-- **Azure Infrastructure**: ₹800 per month for hosting the Kubernetes cluster and application.
+- **Azure Infrastructure**: ₹1058 per month for the Kubernetes cluster.
 
 ---
 
